@@ -6,7 +6,7 @@ public:
     int maxProfit(vector<int>& prices) {
         int costPrice = prices[0];
         int netProfit = 0;
-        for(int i=1; i<pricesgit config --list --show-origin.size(); i++){
+        for(int i=1; i<prices.size(); i++){
             if(prices[i] > costPrice){
                 netProfit = max(netProfit, prices[i]-costPrice);
             }else{
