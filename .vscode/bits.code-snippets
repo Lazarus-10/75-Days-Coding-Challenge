@@ -19,11 +19,11 @@
 	"": {
 		"prefix": "bits",
 		"body": [
-		  "// $1",
+		  "// $2",
 		  "#include <bits/stdc++.h>",
 		  "using namespace std;",
 		  "",
-		  "$2"
+		  "$1"
 		],
 		"description": ""
 	  }
