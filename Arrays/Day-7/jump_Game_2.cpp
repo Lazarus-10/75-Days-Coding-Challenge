@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/jump-game-ii/submissions/
+// Discussion: https://leetcode.com/problems/jump-game-ii/discuss/1192401/Easy-Solutions-w-Explanation-or-Optimizations-from-Brute-Force-to-DP-to-Greedy-BFS 
 #include <bits/stdc++.h>
 using namespace std;
 
