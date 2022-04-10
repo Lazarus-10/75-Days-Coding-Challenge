@@ -24,7 +24,7 @@ public:
     // which is done here efficiently by maintaining a min stack
     // e.g for histo[2] = 5, leftSmallest index = 1, and rightSmallest index = 4
     
-    // O(4n)
+    // T.C ~ O(4n)
     /*int largestRectangleArea(vector<int>& arr) {
         int n = arr.size();
         int left[n], right[n];
