@@ -4,9 +4,17 @@ using namespace std;
 
 class Solution {
 public:
+    // we know that left half is always going to be smaller than right half
+    // arr1 can contribute between 0 and all of its element to first half
+    // we will use binary seach on the contribution
+
+    // let's say contribution of arr1 in first half is cut1
     // e.g : arr1 = {7,12, 14, 15}, arr2 = {1,2,3,4,9,11};
     // cut1 = 2, => arr1 = {7 , 12 / 14, 15}
     // cut2 = 3, => arr2 = {1,2, 3 / 4, 9, 11}
+    // we know l1 is always going to be smaller than r1 as they belong to same array, similar for l2 and r2
+    // we compare only l1 with r2 and l2 with r1
+    
     // compare 12(l1) with 4(r2) and 3(l2) with 14(r1)
     // as l1 > r2 means 12 can't be on left hand side of the merged array, so shift the end to cut-1
 
