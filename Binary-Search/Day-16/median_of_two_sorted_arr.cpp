@@ -4,20 +4,25 @@ using namespace std;
 
 class Solution {
 public:
-    // we know that left half is always going to be smaller than right half
-    // arr1 can contribute between 0 and all of its element to first half
-    // we will use binary seach on the contribution
+    // In a sorted array left half is always going to be smaller than right half
+    // Hence, arr1 can contribute between 0 and all of its element, to the first half
+    // So, we will use binary seach on the contribution
 
     // e.g : arr1 = {7,12, 14, 15}, arr2 = {1,2,3,4,9,11};
     // let's say contribution of arr1 in first half is cut1(middle of the arr1)
     // cut1 = 2, => arr1 = {7 , 12 / 14, 15}, find cut2 = (m + n)/2 - cut1 => (4+6)/2 - 2 = 3
     // cut2 = 3, => arr2 = {1,2, 3 / 4, 9, 11}
+    // Take l1 as last element of first half from arr1, r1 as first element of second half from arr1
+    // Take l2 as last element of fist half from arr2, r2 as first elment of second half from arr2
+
     // we know l1 is always going to be smaller than r1 as they belong to same array, similar for l2 and r2
     // we compare only l1 with r2 and l2 with r1
-    
-    // compare 12(l1) with 4(r2) and 3(l2) with 14(r1)
-    // as l1 > r2 means 12 can't be on left hand side of the merged array, so shift the end to cut-1
 
+    // compare 12(l1) with 4(r2) and 3(l2) with 14(r1)
+    // as l1 > r2 means 12 can't be on left half side of the merged array, so shift the end to cut-1
+
+    // For any array, if its contribtution to the left half is 0, we will update the left with -INFINITY
+    // similarly, if its contribution to right half is 0, we will update right with +INFINITY,  to pass corner cases
     // cut1 = 0 => arr1 = {-INFINITY / 7,12,14,15} 
     // cut2 = 5 => arr2 = {1,2,3,4,9 / 11}
     // compare -INF(l1) with 11(r2) and 9(l2) with 7(r1)
@@ -28,6 +33,39 @@ public:
     // compare 7(l1) with 9(r2) and 4(l2) with 12(r1)
     // as l1 <= r2 and l2 <= r1 means it is correct partition
     // so the element at mid will be max(l1, l2) and min(r1, r2) in case of even length OR max(l1, l2) in case of odd length
+
+    // Here total length = 10 which is even hence, median = (max(7, 4) + min(12, 9))/2 = 8
+
+// O(Log(m+n)) , O(1)
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+    if(nums1.size() > nums2.size())return findMedianSortedArrays(nums2, nums1); // to make sure to run our search on smaller size array
+    int n1 = nums1.size();
+    int n2 = nums2.size();
+    int start = 0, end = n1;
+    while(start <=  end){
+        int cut1 = (start + end) >> 1;
+        int cut2 = (((n1+n2+1) >> 1) - cut1);
+        
+        int l1 = cut1 == 0 ? INT_MIN : nums1[cut1-1];
+        int l2 = cut2 == 0 ? INT_MIN : nums2[cut2-1];
+        
+        int r1 = cut1 == n1 ? INT_MAX : nums1[cut1];
+        int r2 = cut2 == n2 ? INT_MAX : nums2[cut2];
+        
+        if(l1 <= r2 && l2 <= r1){
+            if((n1+n2)&1){
+                return max(l1, l2);
+            }else{
+                return (max(l1,l2) + min(r1, r2))/2.0;
+            }
+        }else if(l1 > r2){
+            end = cut1 -1;
+        }else{
+            start = cut1 + 1;
+        }
+    }
+    return 0.0;
+ }
 
     // O(Log(m+n)) , O(1)
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
